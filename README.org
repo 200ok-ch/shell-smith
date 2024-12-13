@@ -1,0 +1,71 @@
+* Shell Smith
+
+A Babashka library for handling configuration from multiple sources with a unified interface.
+
+** Features
+
+- Configuration management from multiple sources:
+  - Command-line arguments (using docopt)
+  - YAML configuration files
+  - Environment variables
+  - Default values
+- Automatic configuration merging with precedence
+- Simple and declarative configuration setup
+
+** Installation
+
+Add to your =deps.edn= or =bb.edn=:
+
+#+begin_src clojure
+{:deps {200ok-ch/shell-smith {:git/url "https://github.com/200ok-ch/shell-smith"
+                              :sha "current-sha"}}}
+#+end_src
+
+** Usage
+
+*** Basic Example
+
+#+begin_src clojure
+(ns my-app.core
+  (:require [shell-smith.core :as smith]))
+
+(def usage "
+Usage:
+  app [--port <port>]
+  app (-h | --help)
+
+Options:
+  -h --help     Show this screen
+  --port <port> Port number [default: 3000]
+")
+
+(def config
+  (smith/config usage
+                :name "myapp"))
+#+end_src
+
+*** Configuration Sources (in order of precedence)
+
+1. Command line arguments
+2. Environment variables (prefixed with uppercase app name)
+3. YAML configuration file
+4. Default values
+
+*** Configuration File
+
+Create a =myapp.yml= in your working directory:
+
+#+begin_src yaml
+port: 8080
+#+end_src
+
+*** Environment Variables
+
+Environment variables should be prefixed with the uppercase app name:
+
+#+begin_src shell
+MYAPP_PORT=9000
+#+end_src
+
+** License
+tbd.
