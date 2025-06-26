@@ -48,14 +48,19 @@ Options:
 
 1. Command line arguments
 2. Environment variables (prefixed with uppercase app name)
-3. YAML configuration file
-4. Default values
+3. YAML configuration files
+   1. locally: =myapp.yml=
+   2. oldschool: =~/.myapp.yml=
+   3. newschool: =${XDG_CONFIG_HOME}/myapp/config.yml=
+4. Defaults provided by usage string
+5. Defaults provided by call to =shell-smith.core/config=
 
 *** Configuration File
 
 Create a =myapp.yml= in your working directory:
 
 #+begin_src yaml
+---
 port: 8080
 #+end_src
 

@@ -1,2 +1,8 @@
 {:paths ["src"]
- :deps {dev.nubank/docopt {:mvn/version "0.6.1-fix7"}}}
+ :deps {org.clojure/clojure {:mvn/version "1.12.0"}
+        dev.nubank/docopt {:mvn/version "0.6.1-fix7"}
+        clj-commons/clj-yaml {:mvn/version "1.0.29"}
+        babashka/fs {:mvn/version "0.5.24"}}
+ :aliases
+ {:build {:deps {io.github.clojure/tools.build {:git/tag "v0.10.7"}}
+          :ns-default build}}}
