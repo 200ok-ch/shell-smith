@@ -72,5 +72,30 @@ Environment variables should be prefixed with the uppercase app name:
 MYAPP_PORT=9000
 #+end_src
 
+** Key Difference: Handling Defaults
+
+Important: When writing docopt usage strings for shell-smith, avoid
+using docopt's standard syntax for defaults. If you use docopt's
+default syntax, those defaults will override values from your
+configuration file(s), which is typically not the desired behavior.
+
+*** Recommended Approach
+
+Instead of using docopt's square bracket syntax for defaults, follow these steps:
+
+1. Document defaults informatively: Replace docopt's square brackets
+   [] with regular parentheses () to show default values in a purely
+   informational manner
+
+2. Provide defaults programmatically: Pass your defaults as a separate
+   map to the config function:
+
+#+begin_src clojure
+(shell-smith.core/config usage :defaults your-defaults-map)
+#+end_src
+
+This approach allows shell-smith to properly merge configuration
+values in the correct precedence order.
+
 ** License
 tbd.
